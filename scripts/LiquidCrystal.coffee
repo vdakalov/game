@@ -20,7 +20,7 @@ class LiquidCrystal
   # buffer for active pixels
   active_pixels = {}
 
-  getKey = (x,y) -> "x#{x}y#{y}"
+  getKey = (x,y) -> "x#{x>>0}y#{y>>0}"
 
   constructor: (@width, @height) ->
 

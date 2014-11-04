@@ -49,3 +49,6 @@ window.repeat = (num, context, handler) ->
 
 window.trim = (string) ->
   string.replace(/^\s*|\s*$/g, '')
+
+window.interval = (delay, handler) -> setInterval handler, delay
+window.timeout = (delay, handler) -> setTimeout handler, delay
