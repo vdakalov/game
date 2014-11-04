@@ -1,44 +1,54 @@
 class Motion
 
-  moveHandler = ->
-    # clear display
-    do @display.clear
+  constructor: (@symbols, @from, @speed, @infinitely = false) ->
 
-    # print symbols
-    each @symbols, @, (symbol) ->
-      @display.printSymbol symbol
-      @display.setCursor @position.x + symbol.size + 1, @display.getCursor().y
+    @position =
+      x: @from.x
+      y: @from.y
 
-    # chack on end
-    if @position.x >= @to.x and @position.y >= @to.y
-      clearInterval @time
+  render: (display) ->
+    if display instanceof Display
 
-    # move cursor
-    @display.setCursor @position.x += @step.x, @position.y += @step.y
+      # chack on end
+      if @infinitely or (@position.x >= @to.x and @position.y >= @to.y)
+        # change position
+        @position.x += @speed.x
+        @position.y += @speed.y
 
-  constructor: (@display, @symbols, @from, @to, @speed) ->
-    if @display instanceof Display
-      @relative =
-        x: Math.abs(@to.x - @from.x)
-        y: Math.abs(@to.y - @from.y)
+      # move cursor
+      display.setCursor @position.x, @position.y
 
-      @step =
-        x: if @relative.x > @relative.y then 1 else @relative.x / @relative.y
-        y: if @relative.y > @relative.x then 1 else @relative.y / @relative.x
-
-      @position =
-        x: @from.x
-        y: @from.y
+      # print symbols
+      each @symbols, @, (symbol) ->
+        display.printSymbol symbol
+        display.setCursor @position.x + symbol.size + 1, display.getCursor().y
 
   reset: ->
     @position = x: @from.x, y: @from.y
 
-  move: ->
-    @time = interval @speed, moveHandler.bind @
+class Motions
+  frame_delay = null
+  frame_display = null
+  motions = []
+
+  constructor: (display, delay) ->
+    frame_delay = delay
+    frame_display = display
+
+  motionRegister: (motion) ->
+    if motion instanceof Motion
+      motions.push motion
+
+  start: ->
+    @time = interval frame_delay, ->
+      frame_display.clear()
+      each motions, (motion) ->
+        motion.render display
 
   stop: ->
     clearInterval @time
 
 
 
+window.Motions = Motions
 window.Motion = Motion

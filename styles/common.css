@@ -27,3 +27,17 @@ body {
 #canvas div.active {
     opacity: .9;
 }
+
+#canvas div {
+    width: 10px;
+    height: 10px;
+}
+
+#canvas.edit div:hover {
+    opacity: .5;
+}
+
+#canvas.edit div.select {
+    background: red;
+    opacity: 1;
+}

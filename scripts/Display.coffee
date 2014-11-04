@@ -1,14 +1,14 @@
 class Symbol
   constructor: (@name, @size, hexMask) ->
     mask = parseInt(hexMask, 16).toString(2)
-    mask = new Array(41).join(0).replace(new RegExp("\\d{0,#{mask.length}}$"), mask).split(/\0?/)
+    mask = new Array((Math.ceil(mask.length/@size)*@size)+1).join(0).replace(new RegExp("\\d{0,#{mask.length}}$"), mask).split(/\0?/)
     mask = collect mask, (item) -> +item
     @mask = mask
 
 class Display
 
   # pixel size
-  pixel_size = width: 5, height: 5
+  pixel_size = width: 10, height: 10
   display_size = width: null, height: null
 
   # current cursor position
@@ -25,7 +25,7 @@ class Display
       x: (cursorPosition.x + (index % symbol.size)) % display_size.width
       y: (cursorPosition.y + (index / symbol.size >> 0)) % display_size.height
 
-  constructor: (canvas, width, height, @mode = modes.byDefault) ->
+  constructor: (@canvas, width, height, @mode = modes.byDefault) ->
 
     # remember sizes
     display_size = width: width, height: height
@@ -35,7 +35,7 @@ class Display
     @liquidCrystal.mount canvas
 
     # update canvas size
-    el.styles canvas, width: "#{(width*pixel_size.width)+1}px", height: "#{(height*pixel_size.height)+1}px"
+    el.styles canvas, width: "#{(width*(pixel_size.width+1))}px", height: "#{(height*(pixel_size.height+1))}px"
 
   clear: ->
     @liquidCrystal.clear()
