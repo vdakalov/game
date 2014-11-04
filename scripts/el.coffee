@@ -1,9 +1,34 @@
-el =
+window.el =
+
+  isEl: (el) -> el instanceof HTMLElement
+
   get: document.querySelector.bind document
+
   getAll: document.querySelectorAll.bind document
+
   make: (tagName, attrs, body, parent) ->
-    el = if tagName instanceof HTMLElement then tagName else document.createElement tagName
+    el = if @isEl tagName then tagName else document.createElement tagName
     each attrs or {}, (value, key) -> el.setAttribute key, value
     el.innerHTML = body if typeof body is "string"
-    el.appendChild parent if parent instanceof HTMLElement
+    parent.appendChild el if @isEl parent
     el
+
+  style: (el, style) ->
+    el.style[style]
+
+  styles: (el, rules) ->
+    each rules, @, (value, rule) ->
+      el.style[rule] = value
+
+  class: (el, className, turn) ->
+    new RegExp(className).test(el.className)
+    if arguments.length > 2
+      el.className = trim(el.className.replace(new RegExp("(^|\s)#{className}($|\s)"), " "))
+      if turn is true
+        el.className = trim("#{el.className} #{className}")
+    else
+      new RegExp(className).test(el.className)
+
+
+
+

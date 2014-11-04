@@ -2,28 +2,27 @@
 
 WORKING_DIR=/home/raccoon/Workspace/projects/game
 SOURCE_DIR=${WORKING_DIR}/scripts
-TARGET_DIR=${WORKING_DIR}
+TARGET_DIR=${WORKING_DIR}/src
 TARGET_FILE=game
 
-DEBUG=$1
+BUFFER=${WORKING_DIR}/buffer.js
 
-# source buffer (for js)
-BUFFER=""
+echo "Compilation start!"
+
+if [ -f ${BUFFER} ]; then
+    echo "Clean buffer..."
+    rm ${BUFFER}
+fi
 
 function compile {
     echo "compile ${1}"
-    SOURCE_JS=$(/usr/local/bin/coffee --no-header --print --compile $1)
-    BUFFER=${BUFFER}${SOURCE_JS}
+    /usr/local/bin/coffee --print $1 >> ${BUFFER}
 }
 
 function compress {
-    echo "compress..."
-    if [ ${DEBUG} == "debug" ]; then
-        echo "-output-buffer-------------------------------"
-        echo ${BUFFER};
-        echo "---------------------------------------------"
-    fi
-    echo ${BUFFER} | /usr/local/bin/uglifyjs --compress --output ${TARGET_DIR}/${TARGET_FILE}.min.js
+    echo "Compress start!"
+    java -jar /home/raccoon/opt/gcc/compiler.jar --create_source_map=${TARGET_DIR}/${TARGET_FILE}.map.js --charset=UTF-8 --js=${BUFFER} --js_output_file=${TARGET_DIR}/${TARGET_FILE}.min.js
+    echo -e "\033[00;32mFile ${TARGET_DIR}/${TARGET_FILE}.min.js created!\033[0m"
 }
 
 for line in $(cat ${SOURCE_DIR}/dependencies); do

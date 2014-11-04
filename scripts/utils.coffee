@@ -44,5 +44,8 @@ window.collectEntries = (obj, context, handler) ->
 
 window.repeat = (num, context, handler) ->
   [handler, context] = [context, null] if arguments.length is 2
-  each new Array(num), context, (value, key, index) ->
+  each (new Array(num)).join(".").split(/.?/), context, (value, key, index) ->
     if context then handler.call(context, index) else handler index
+
+window.trim = (string) ->
+  string.replace(/^\s*|\s*$/g, '')
