@@ -36,4 +36,8 @@ for file in ${SOURCE_DIR}/*.coffee; do
     fi
 done
 
-compress
+if [ "$1" == "compress" ]; then
+    compress
+else
+    cp ${BUFFER} ${TARGET_DIR}/${TARGET_FILE}.min.js
+fi

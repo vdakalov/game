@@ -2,8 +2,8 @@ class Pixel
   tagName = "div"
   className = "active"
 
-  constructor: (@x, @y, parent) ->
-    @el = el.make tagName, null, null, parent
+  constructor: (@x, @y) ->
+    @el = el.make tagName
 
   active: (turn) ->
     el.class @el, className, turn
@@ -12,10 +12,7 @@ class Pixel
   isActive: ->
     el.class @el, className
 
-class Display
-
-  # pixel size
-  pixel_size = width: 5, height: 5
+class LiquidCrystal
 
   # pixel collect
   pixels = {}
@@ -25,17 +22,20 @@ class Display
 
   getKey = (x,y) -> "x#{x}y#{y}"
 
-  constructor: (@canvas, @width, @height) ->
+  constructor: (@width, @height) ->
 
     # build pixel
     repeat @width * @height, @, (index) ->
       x = index % @width
       y = index / @width >> 0
       key = getKey x, y
-      pixels[key] = new Pixel x, y, @canvas
+      pixels[key] = new Pixel x, y
 
-    # update canvas size
-    el.styles @canvas, width: "#{@width*pixel_size.width}px", height: "#{@height*pixel_size.height}px"
+  mount: (parent) ->
+    fragment = document.createDocumentFragment()
+    each pixels, (pixel) ->
+      fragment.appendChild pixel.el
+    parent.appendChild fragment
 
   clear: ->
     each active_pixels, (pixel) -> pixel.active false
@@ -52,4 +52,4 @@ class Display
     false
 
 
-window.Display = Display
+window.LiquidCrystal = LiquidCrystal
