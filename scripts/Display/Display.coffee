@@ -30,7 +30,7 @@ service "Display:LiquidCrystal,RenderPreprocessor,Symbol,utils",
       cursor: do ->
         position = [0, 0]
         (x, y) ->
-          [x, y] = [ if x >= 0 then x else position[0], if y >=0 then y else position[1] ]
+          [x, y] = [ (if x >= 0 then x else position[0]), (if y >=0 then y else position[1]) ]
 
       printSymbol: (symbol) ->
         if symbol instanceof Symbol

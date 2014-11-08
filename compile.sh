@@ -6,6 +6,7 @@ TARGET_DIR=${WORKING_DIR}/src
 TARGET_FILE=game
 
 BUFFER=${WORKING_DIR}/buffer.js
+DEPENDENCIES_INJECTION=${SOURCE_DIR}/etc/di.coffee
 
 echo "Compilation start!"
 
@@ -29,12 +30,14 @@ function loadDir {
     for file in $1/*; do
         if [ -d "$file" ]; then
             loadDir ${file}
-        elif [ -f "$file" ] && [ "${file##*.}" == "coffee" ]; then
+        elif [ -f "$file" ] && [ "${file##*.}" == "coffee" ] && [ ${file} != ${DEPENDENCIES_INJECTION} ]; then
             compile ${file}
         fi
     done
 }
 
+
+compile ${DEPENDENCIES_INJECTION}
 loadDir ${SOURCE_DIR}
 
 if [ "$1" == "compress" ]; then
