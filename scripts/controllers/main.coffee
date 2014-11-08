@@ -19,10 +19,7 @@ controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
   # build character generator
   cg = new CharacterGenerator lc, 16, 2
 
-  cg.printSymbol symbols.A
-  cg.printSymbol symbols.SPACE
-  cg.printSymbol symbols.B
-  cg.printSymbol symbols.NEWLINE
-  cg.printSymbol symbols.C
+  window.cg = cg
+  window.symbols = symbols
 
 
