@@ -1,4 +1,4 @@
-di "DefaultPixel", ["el", "BasePixel"], (el, BasePixel) ->
+service "DefaultPixel:el,BasePixel", (el, BasePixel) ->
   class DefaultPixel
     DefaultPixel:: = new BasePixel
     tagName: "div"

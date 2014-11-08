@@ -1,4 +1,4 @@
-di "utils",
+service "utils",
   each: (obj, context, handler) ->
     index = 0
     [handler, obj, context] = [obj, this, null] if arguments.length is 1
@@ -53,3 +53,9 @@ di "utils",
 
   interval: (delay, handler) -> setInterval handler, delay
   timeout: (delay, handler) -> setTimeout handler, delay
+
+  coord2index: (width, x, y) ->
+    ((y - 1) * width) + x - 1
+
+  index2coord: (width, index) ->
+    [width % index, (width / index >> 0) + 1]

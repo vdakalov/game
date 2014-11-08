@@ -1,4 +1,4 @@
-di "BasePixel", ["el"], (el) ->
+service "BasePixel:el", (el) ->
   class BasePixel
     make: ->
       @el = el.make @tagName

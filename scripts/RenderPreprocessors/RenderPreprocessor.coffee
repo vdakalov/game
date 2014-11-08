@@ -1,0 +1,2 @@
+service "RenderPreprocessor",
+  class RenderPreprocessor

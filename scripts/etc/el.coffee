@@ -1,4 +1,4 @@
-di "el", ["utils"], (utils) ->
+service "el:utils", (utils) ->
 
   isEl: (el) -> el instanceof HTMLElement
 

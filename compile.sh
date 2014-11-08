@@ -25,16 +25,17 @@ function compress {
     echo -e "\033[00;32mFile ${TARGET_DIR}/${TARGET_FILE}.min.js created!\033[0m"
 }
 
-for line in $(cat ${SOURCE_DIR}/dependencies); do
-    compile ${SOURCE_DIR}/${line}
-done
+function loadDir {
+    for file in $1/*; do
+        if [ -d "$file" ]; then
+            loadDir ${file}
+        elif [ -f "$file" ] && [ "${file##*.}" == "coffee" ]; then
+            compile ${file}
+        fi
+    done
+}
 
-for file in ${SOURCE_DIR}/*.coffee; do
-    filename=${file#${SOURCE_DIR}/}
-    if [ -f ${file} ] && [ "$(grep ${filename} ${SOURCE_DIR}/dependencies)" == "" ]; then
-        compile ${file}
-    fi
-done
+loadDir ${SOURCE_DIR}
 
 if [ "$1" == "compress" ]; then
     compress

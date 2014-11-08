@@ -1,9 +1,14 @@
 
-inject ["el", "utils", "MT16S2H2FLA"], (el, utils, MT16S2H2FLA) ->
-  lc = new MT16S2H2FLA 80, 16
+controller "main:el,HexSymbol,Display", (el,HexSymbol,Display) ->
 
-  lc.mount el.get "#canvas"
+  symbols =
+    A: new HexSymbol "A", 5, "22a318fe31"
+    B: new HexSymbol "B", 4, "f463e8c63e"
+    U: new HexSymbol "C", 5, "746108422e"
+    DOT: new HexSymbol "DOT", 2, "f"
 
-  lc.setPixel(2, 2)
+  display = new Display el.get("#canvas"), 80, 16
 
-  window.lc = lc
+  display.printSymbol(symbols.A)
+
+  window.display = display
