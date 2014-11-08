@@ -8,6 +8,9 @@ controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
     C: new Symbols.Hexadecimal "C", 5, "746108422e"
     DOT: new Symbols.Hexadecimal "DOT", 2, "f"
 
+    SPACE: new Symbols.ControlSymbol CharacterGenerator.CONTROL_SYMBOL_INCREMENT
+    NEWLINE:new Symbols.ControlSymbol CharacterGenerator.CONTROL_SYMBOL_NEWLINE
+
   mountPoint = el.get("#canvas")
 
   # build the emulator of liquid crystal display (model MT16S2H2FLA)
@@ -17,9 +20,9 @@ controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
   cg = new CharacterGenerator lc, 16, 2
 
   cg.printSymbol symbols.A
-  cg.printSymbol new Symbols.ControlSymbol cg.CONTROL_SYMBOL_INCREMENT
+  cg.printSymbol symbols.SPACE
   cg.printSymbol symbols.B
-  cg.printSymbol new Symbols.ControlSymbol cg.CONTROL_SYMBOL_NEWLINE
+  cg.printSymbol symbols.NEWLINE
   cg.printSymbol symbols.C
 
 

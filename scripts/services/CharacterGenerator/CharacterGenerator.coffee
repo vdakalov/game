@@ -1,9 +1,9 @@
 service "CharacterGenerator:LiquidCrystal,Symbols,utils", (LiquidCrystal,Symbols,utils) ->
   class CharacterGenerator
 
-    CONTROL_SYMBOL_RESET: "resetCursor"
-    CONTROL_SYMBOL_NEWLINE: "newLine"
-    CONTROL_SYMBOL_INCREMENT: "increment"
+    @CONTROL_SYMBOL_RESET = "resetCursor"
+    @CONTROL_SYMBOL_NEWLINE = "newLine"
+    @CONTROL_SYMBOL_INCREMENT = "increment"
 
     liquidCrystal = null
 
