@@ -4,18 +4,20 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
 
     LiquidCrystal:: = new Array
 
-    @pixelSize: 1
+    pixelSize: 1
+    backlight: "#FED04B"
 
     init: (pixel = DefaultPixel) ->
       if utils.instanceOf pixel, BasePixel
         utils.repeat @width * @height, @, (index) ->
           coord = utils.index2coord(@width, index)
-          @push new pixel coord[0], coord[1]
+          @push new pixel coord[0], coord[1], @pixelSize
 
     mount: (parent) ->
       el.styles parent,
-        width: "#{@pixelSize*@width}px"
-        height: "#{@pixelSize*@height}px"
+        width: "#{((@pixelSize+1)*@width)+1}px"
+        height: "#{((@pixelSize+1)*@height)+1}px"
+        background: @backlight
       fragment = document.createDocumentFragment()
 
       utils.each @, (pixel) ->

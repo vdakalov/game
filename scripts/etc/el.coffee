@@ -13,7 +13,9 @@ service "el:utils", (utils) ->
     parent.appendChild el if @isEl parent
     el
 
-  style: (el, style) ->
+  style: (el, style, value) ->
+    if arguments.length is 3
+      el.style[style] = value
     el.style[style]
 
   styles: (el, rules) ->

@@ -2,6 +2,5 @@ service "DefaultPixel:el,BasePixel", (el, BasePixel) ->
   class DefaultPixel
     DefaultPixel:: = new BasePixel
     tagName: "div"
-    className: "active"
-    constructor: (@x, @y) ->
+    constructor: (@x, @y, @size) ->
       do @make

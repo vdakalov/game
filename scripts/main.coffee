@@ -1,6 +1,6 @@
 
-controller "main:el,HexSymbol,Display,MT16S2H2FLA,CutRenderPreprocessor",
-(el,HexSymbol,Display,MT16S2H2FLA,CutRenderPreprocessor) ->
+controller "main:el,HexSymbol,Display,MT16S2H2FLA,CloseRenderPreprocessor",
+(el,HexSymbol,Display,MT16S2H2FLA,CloseRenderPreprocessor) ->
 
   symbols =
     A: new HexSymbol "A", 5, "22a318fe31"
@@ -10,6 +10,8 @@ controller "main:el,HexSymbol,Display,MT16S2H2FLA,CutRenderPreprocessor",
 
   display = new Display el.get("#canvas"), 80, 16
   display.setLiquidCrystal MT16S2H2FLA
-#  display.setPreprocessor CutRenderPreprocessor
+  display.setPreprocessor CloseRenderPreprocessor
+
+  display.printSymbol symbols.A
 
   window.display = display

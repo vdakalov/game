@@ -1,29 +1,8 @@
-body {
-    margin: 0;
-}
-
 #canvas {
-    background: #FED04B;
-
     margin: 10% auto 0;
-
     cursor: default;
-
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
-}
-
-#canvas div {
-    width: 4px;
-    height: 4px;
-    background: #444444;
-    float: left;
-    margin: 1px 0 0 1px;
-    opacity: .1;
-}
-
-#canvas div.active {
-    opacity: .9;
 }
