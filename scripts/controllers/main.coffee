@@ -1,12 +1,12 @@
 
-controller "main:el,HexSymbol,CharacterGenerator,MT16S2H2FLA,CloseRenderPreprocessor",
-(el,HexSymbol,CharacterGenerator,MT16S2H2FLA,CloseRenderPreprocessor) ->
+controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
+(el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA) ->
 
   symbols =
-    A: new HexSymbol "A", 5, "22a318fe31"
-    B: new HexSymbol "B", 5, "f463e8c63e"
-    U: new HexSymbol "C", 5, "746108422e"
-    DOT: new HexSymbol "DOT", 2, "f"
+    A: new Symbols.Hexadecimal "A", 5, "22a318fe31"
+    B: new Symbols.Hexadecimal "B", 5, "f463e8c63e"
+    C: new Symbols.Hexadecimal "C", 5, "746108422e"
+    DOT: new Symbols.Hexadecimal "DOT", 2, "f"
 
   mountPoint = el.get("#canvas")
 
@@ -14,7 +14,12 @@ controller "main:el,HexSymbol,CharacterGenerator,MT16S2H2FLA,CloseRenderPreproce
   lc = new MT16S2H2FLA mountPoint
 
   # build character generator
-  cg = new CharacterGenerator lc
+  cg = new CharacterGenerator lc, 16, 2
 
   cg.printSymbol symbols.A
+  cg.printSymbol new Symbols.ControlSymbol cg.CONTROL_SYMBOL_INCREMENT
+  cg.printSymbol symbols.B
+  cg.printSymbol new Symbols.ControlSymbol cg.CONTROL_SYMBOL_NEWLINE
+  cg.printSymbol symbols.C
+
 

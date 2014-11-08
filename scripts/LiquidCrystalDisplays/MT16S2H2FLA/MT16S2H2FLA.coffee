@@ -11,10 +11,6 @@ service "MT16S2H2FLA:LiquidCrystal,MT16S2H2FLA_PIXEL", (LiquidCrystal,MT16S2H2FL
 
     pixel: MT16S2H2FLA_PIXEL
 
-    blockSize:
-      width: 5
-      height: 8
-
     constructor: (canvas) ->
       do @build
       @mount canvas
