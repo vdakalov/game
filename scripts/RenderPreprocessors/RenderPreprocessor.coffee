@@ -1,2 +1,0 @@
-service "RenderPreprocessor", ->
-  class RenderPreprocessor
