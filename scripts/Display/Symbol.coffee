@@ -1,2 +1,0 @@
-service "Symbol", ->
-  class Symbol

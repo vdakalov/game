@@ -1,8 +1,16 @@
-#canvas {
-    margin: 10% auto 0;
+body {
+    padding-top: 10%;
+}
+
+body > div {
+    margin: 0 auto;
     cursor: default;
     -webkit-user-select: none;
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
+}
+
+body > div + div {
+    margin-top: 25px;
 }
