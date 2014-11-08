@@ -1,4 +1,4 @@
-window.el =
+di "el", ["utils"], (utils) ->
 
   isEl: (el) -> el instanceof HTMLElement
 
@@ -8,7 +8,7 @@ window.el =
 
   make: (tagName, attrs, body, parent) ->
     el = if @isEl tagName then tagName else document.createElement tagName
-    each attrs or {}, (value, key) -> el.setAttribute key, value
+    utils.each attrs or {}, (value, key) -> el.setAttribute key, value
     el.innerHTML = body if typeof body is "string"
     parent.appendChild el if @isEl parent
     el
@@ -17,7 +17,7 @@ window.el =
     el.style[style]
 
   styles: (el, rules) ->
-    each rules, @, (value, rule) ->
+    utils.each rules, @, (value, rule) ->
       el.style[rule] = value
 
   class: (el, className, turn) ->

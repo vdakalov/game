@@ -1,3 +1,6 @@
+di.coffee
 utils.coffee
 el.coffee
-Motion.coffee
+LiquidCrystal/BasePixel.coffee
+LiquidCrystal/DefaultPixel.coffee
+LiquidCrystal/LiquidCrystal.coffee
