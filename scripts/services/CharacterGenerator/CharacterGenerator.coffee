@@ -19,7 +19,7 @@ service "CharacterGenerator:LiquidCrystal,Symbols,utils", (LiquidCrystal,Symbols
         cursor[0] = 0
         cursor[1] = (cursor[1] + (liquidCrystal.height / lines)) % liquidCrystal.height
       increment: ->
-        if cursor[0] >= letters
+        if cursor[0] >= (letters - 1) * (liquidCrystal.width / letters)
           cursor[0] = 0
           do systemMethods.newLine
         else
