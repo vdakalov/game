@@ -23,9 +23,9 @@ di "el", ["utils"], (utils) ->
   class: (el, className, turn) ->
     new RegExp(className).test(el.className)
     if arguments.length > 2
-      el.className = trim(el.className.replace(new RegExp("(^|\s)#{className}($|\s)"), " "))
+      el.className = utils.trim(el.className.replace(new RegExp("(^|\s)#{className}($|\s)"), " "))
       if turn is true
-        el.className = trim("#{el.className} #{className}")
+        el.className = utils.trim("#{el.className} #{className}")
     else
       new RegExp(className).test(el.className)
 

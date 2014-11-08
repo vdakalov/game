@@ -1,7 +1,7 @@
-di "LiquidCrystal", ["DefaultPixel", "utils", "el"], (DefaultPixel, utils, el) ->
+di "LiquidCrystal", ["DefaultPixel", "BasePixel", "utils", "el"], (DefaultPixel, BasePixel, utils, el) ->
 
   coord2index = (width, x, y) ->
-    ((y - 1) * width) + x
+    ((y - 1) * width) + x - 1
 
   index2coord = (width, index) ->
     [width % index, (width / index >> 0) + 1]
@@ -10,23 +10,21 @@ di "LiquidCrystal", ["DefaultPixel", "utils", "el"], (DefaultPixel, utils, el) -
 
     LiquidCrystal:: = new Array
 
-    defaultOptions =
-      pixelSize: 5
+    @pixelSize: 1
 
-    constructor: (@width, @height, @options = defaultOptions) ->
-
-      # build pixel
-      utils.repeat @width * @height, @, (index) ->
-        coord = index2coord(@width, index)
-        @push new DefaultPixel coord[0], coord[1]
+    init: (pixel = DefaultPixel) ->
+      if (pixel::) instanceof BasePixel
+        utils.repeat @width * @height, @, (index) ->
+          coord = index2coord(@width, index)
+          @push new pixel coord[0], coord[1]
 
     mount: (parent) ->
       el.styles parent,
-        width: "#{@options.pixelSize*@width}px"
-        height: "#{@options.pixelSize*@height}px"
+        width: "#{@pixelSize*@width}px"
+        height: "#{@pixelSize*@height}px"
       fragment = document.createDocumentFragment()
       utils.each @, (pixel) ->
-        if pixel instanceof DefaultPixel
+        if pixel instanceof BasePixel
           fragment.appendChild pixel.el
       parent.appendChild fragment
 

@@ -1,6 +1,7 @@
-di.coffee
-utils.coffee
-el.coffee
+etc/di.coffee
+etc/utils.coffee
+etc/el.coffee
 LiquidCrystal/BasePixel.coffee
 LiquidCrystal/DefaultPixel.coffee
 LiquidCrystal/LiquidCrystal.coffee
+MT16S2H2FLA.coffee
