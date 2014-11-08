@@ -1,0 +1,2 @@
+service "Symbol", ->
+  class Symbol

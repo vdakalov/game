@@ -1,4 +1,4 @@
-window.el =
+service "el:utils", (utils) ->
 
   isEl: (el) -> el instanceof HTMLElement
 
@@ -8,24 +8,26 @@ window.el =
 
   make: (tagName, attrs, body, parent) ->
     el = if @isEl tagName then tagName else document.createElement tagName
-    each attrs or {}, (value, key) -> el.setAttribute key, value
+    utils.each attrs or {}, (value, key) -> el.setAttribute key, value
     el.innerHTML = body if typeof body is "string"
     parent.appendChild el if @isEl parent
     el
 
-  style: (el, style) ->
+  style: (el, style, value) ->
+    if arguments.length is 3
+      el.style[style] = value
     el.style[style]
 
   styles: (el, rules) ->
-    each rules, @, (value, rule) ->
+    utils.each rules, @, (value, rule) ->
       el.style[rule] = value
 
   class: (el, className, turn) ->
     new RegExp(className).test(el.className)
     if arguments.length > 2
-      el.className = trim(el.className.replace(new RegExp("(^|\s)#{className}($|\s)"), " "))
+      el.className = utils.trim(el.className.replace(new RegExp("(^|\s)#{className}($|\s)"), " "))
       if turn is true
-        el.className = trim("#{el.className} #{className}")
+        el.className = utils.trim("#{el.className} #{className}")
     else
       new RegExp(className).test(el.className)
 

@@ -1,30 +1,17 @@
 
-# build symbols
-symbols =
-  A: new Symbol "A", 5, "22a318fe31"
-  B: new Symbol "B", 4, "f463e8c63e"
-  U: new Symbol "C", 5, "746108422e"
-  DOT: new Symbol "DOT", 2, "f"
+controller "main:el,HexSymbol,Display,MT16S2H2FLA,CloseRenderPreprocessor",
+(el,HexSymbol,Display,MT16S2H2FLA,CloseRenderPreprocessor) ->
 
-word2sym = (word) ->
-  collect word.split(/\0?/), (letter) ->
-    symbols[letter]
+  symbols =
+    A: new HexSymbol "A", 5, "22a318fe31"
+    B: new HexSymbol "B", 5, "f463e8c63e"
+    U: new HexSymbol "C", 5, "746108422e"
+    DOT: new HexSymbol "DOT", 2, "f"
 
-# build display
-display = new Display(el.get("#canvas"), 80, 16, "mirror")
-editor = new Editor display
+  display = new Display el.get("#canvas"), 80, 16
+  display.setLiquidCrystal MT16S2H2FLA
+  display.setPreprocessor CloseRenderPreprocessor
 
-display.printSymbol(symbols.U)
+  display.printSymbol symbols.A
 
-#motions = new Motions display, 100
-
-#motions.motionRegister new Motion [symbols.A, symbols.B], (x: 0, y: 0), (x: 1, y: 1), true
-#motions.motionRegister new Motion [symbols.DOT], (x: 0, y: 4), (x: 2, y: 0), true
-
-#motions.start()
-
-# share display
-window.display = display
-window.symbols = symbols
-#window.editor = editor
-#window.motions = motions
+  window.display = display
