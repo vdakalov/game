@@ -1,2 +1,2 @@
-service "RenderPreprocessor",
+service "RenderPreprocessor", ->
   class RenderPreprocessor

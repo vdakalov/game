@@ -7,7 +7,7 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
     @pixelSize: 1
 
     init: (pixel = DefaultPixel) ->
-      if (pixel::) instanceof BasePixel
+      if utils.instanceOf pixel, BasePixel
         utils.repeat @width * @height, @, (index) ->
           coord = utils.index2coord(@width, index)
           @push new pixel coord[0], coord[1]
@@ -17,8 +17,9 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
         width: "#{@pixelSize*@width}px"
         height: "#{@pixelSize*@height}px"
       fragment = document.createDocumentFragment()
+
       utils.each @, (pixel) ->
-        if pixel instanceof BasePixel
+        if utils.instanceOf pixel, BasePixel
           fragment.appendChild pixel.el
       parent.appendChild fragment
 

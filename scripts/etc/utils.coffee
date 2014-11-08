@@ -55,7 +55,13 @@ service "utils",
   timeout: (delay, handler) -> setTimeout handler, delay
 
   coord2index: (width, x, y) ->
-    ((y - 1) * width) + x - 1
+    ((y - 1) * width) + (x - 1)
 
   index2coord: (width, index) ->
-    [width % index, (width / index >> 0) + 1]
+    [(index % width) + 1, (index / width >> 0) + 1]
+
+  instanceOf: (obj1, obj2) ->
+    if obj1 and obj2
+      fnc1 = if typeof obj1 is "function" then obj1.prototype.constructor else obj1.constructor
+      fnc2 = if typeof obj2 is "function" then obj2.prototype.constructor else obj2.constructor
+      fnc1.name is fnc2.name

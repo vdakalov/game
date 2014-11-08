@@ -3,7 +3,7 @@ each = (obj, context, handler) ->
   obj.forEach((handler||context).bind(context or this))
 
 # registered dependencies
-scope =
+window.scope =
   services: {}
   controllers: []
 

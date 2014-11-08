@@ -4,7 +4,7 @@ service "HexSymbol:Symbol,utils", (Symbol, utils) ->
 
     hex2bin = (size, mask) ->
       # translate to bin
-      mask = parseInt(mask).toString(2)
+      mask = parseInt(mask, 16).toString(2)
       # make empty mask with normal length
       normalMask = new Array((Math.ceil(mask.length / size) * size) + 1).join(0)
       # apply take mask to normal mask
