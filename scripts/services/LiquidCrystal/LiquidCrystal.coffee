@@ -26,7 +26,12 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
     clear: ->
       utils.each @, (pixel) -> pixel.active false
 
+    round: (num) ->
+      Math.round num
+
     setPixel: (x, y) ->
-      index = utils.coord2index(@width, x, y)
+      @setIndex utils.coord2index(@width, @round(x), @round(y))
+
+    setIndex: (index) ->
       if index of @
         @[index].active true
