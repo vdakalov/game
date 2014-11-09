@@ -1,6 +1,6 @@
 
-controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
-(el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA) ->
+controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects",
+(el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects) ->
 
   symbols =
     A: new Symbols.Hexadecimal "A", 5, "22a318fe31"
@@ -18,8 +18,14 @@ controller "main:el,Symbols,ControlSymbol,CharacterGenerator,MT16S2H2FLA",
 
   # build character generator
   cg = new CharacterGenerator lc, 16, 2
+#  cg.printSymbol symbols.A
 
-  window.cg = cg
-  window.symbols = symbols
+  # build graphic generator
+  gg = new GraphicGenerator lc
+  gg.render new GraphicObjects.Circle [ 40, 9, 7 ]
+
+
+
+
 
 
