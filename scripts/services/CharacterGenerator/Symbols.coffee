@@ -2,14 +2,19 @@ service "Symbols:utils", (utils) ->
 
   ControlSymbol:
     class ControlSymbol
+      type: "control"
       constructor: (@command) ->
 
   Binary:
     class Binary
+      type: "char"
       constructor: (@name, @mask) ->
 
   Hexadecimal:
     class Hexadecimal
+
+      type: "char"
+
       hex2bin = (size, mask) ->
         # translate to bin
         mask = parseInt(mask, 16).toString(2)

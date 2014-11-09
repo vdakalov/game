@@ -32,9 +32,9 @@ service "CharacterGenerator:LiquidCrystal,Symbols,utils", (LiquidCrystal,Symbols
 
     printSymbol: (symbol) ->
 
-      switch symbol.constructor.name
+      switch symbol.type
 
-        when Symbols.ControlSymbol.name
+        when "control"
           do systemMethods[symbol.command]
 
         else

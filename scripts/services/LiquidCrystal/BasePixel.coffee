@@ -2,7 +2,7 @@ service "BasePixel:el", (el) ->
   class BasePixel
     baseStyles =
       margin: "1px 0 0 1px"
-      float: "left"
+      "float": "left"
     make: ->
       @el = el.make @tagName
       el.styles @el, @styles.common
