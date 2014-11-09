@@ -29,6 +29,18 @@ service "GraphicObjects:utils", (utils) ->
 
       coords
 
+    Circle: ->
+
+      # coords
+      coords = []
+      [X, Y, R] = @map
+
+      utils.repeat 361, (angle) ->
+        coords.push [ X + R * Math.sin(angle + 1), Y + R * Math.cos(angle + 1) ]
+
+      coords
+
+
   # generate obeject classes
   utils.collect renders, (render, name) ->
     class GraphicObject

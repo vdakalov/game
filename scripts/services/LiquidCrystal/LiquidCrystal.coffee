@@ -4,6 +4,10 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
 
     LiquidCrystal:: = new Array
 
+    @name = "Unnamed"
+    @address = "javascript:void(0);"
+    @borderColor = "#000000"
+
     @pixelSize = 1
 
     build: ->
@@ -12,15 +16,36 @@ service "LiquidCrystal:DefaultPixel,BasePixel,utils,el", (DefaultPixel, BasePixe
         @push new @pixel coord[0], coord[1], @pixelSize
 
     mount: (parent) ->
+
+      # styles for wrapper
       el.styles parent,
         width: "#{((@pixelSize+1)*@width)+1}px"
-        height: "#{((@pixelSize+1)*@height)+1}px"
+        height: "#{((@pixelSize+1)*@height)+21}px"
         background: @backlight
+        borderLeft: "4px solid #{@borderColor}"
+        borderRight: "4px solid #{@borderColor}"
+        borderBottom: "4px solid #{@borderColor}"
+
+      # make vendor panel
+      vendor = el.make("a", href: @address, target: "_blank", @name, el.make("div", null, null, parent)).parentNode
+      el.styles vendor,
+        height: "20px"
+        background: "#{@borderColor}"
+      el.styles vendor.children.item(0),
+        color: "#FFFFFF"
+        fontSize: "12px"
+        fontFamily: "sans-serif"
+        textDecoration: "none"
+
+
+      # fragment for pixels
       fragment = document.createDocumentFragment()
 
+      # make pixels
       utils.each @, (pixel) ->
         if utils.instanceOf pixel, BasePixel
           fragment.appendChild pixel.el
+
       parent.appendChild fragment
 
     clear: ->

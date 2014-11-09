@@ -18,12 +18,11 @@ controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,Grap
 
   # build character generator
   cg = new CharacterGenerator lc, 16, 2
-  cg.printSymbol symbols.A
+#  cg.printSymbol symbols.A
 
   # build graphic generator
   gg = new GraphicGenerator lc
-  gg.render new GraphicObjects.Line [ [1, 1], [55, 14] ]
-  gg.render new GraphicObjects.Line [ [1, 14], [44, 1] ]
+  gg.render new GraphicObjects.Circle [ 40, 9, 7 ]
 
 
 
