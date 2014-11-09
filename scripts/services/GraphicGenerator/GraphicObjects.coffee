@@ -2,11 +2,15 @@ service "GraphicObjects:utils", (utils) ->
 
   renders =
 
-    # simple object
+    #####################
+    ### JUST OBJECT ###
+    #####################
     Object: ->
       @map
 
-    # line object
+    #####################
+    ### LINE OBJECT ###
+    #####################
     Line: ->
 
       # line points coords
@@ -29,6 +33,9 @@ service "GraphicObjects:utils", (utils) ->
 
       coords
 
+    #####################
+    ### CIRCLE OBJECT ###
+    #####################
     Circle: ->
 
       # coords
@@ -39,6 +46,13 @@ service "GraphicObjects:utils", (utils) ->
         coords.push [ X + R * Math.sin(angle + 1), Y + R * Math.cos(angle + 1) ]
 
       coords
+
+    ######################
+    ### JUST 3D OBJECT ###
+    ######################
+    Object3D: ->
+      
+
 
 
   # generate obeject classes
