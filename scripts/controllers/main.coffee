@@ -20,7 +20,7 @@ controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,Grap
   lcg = new MT16S2H2FLA mountGraphic
   # build graphic generator
   gg = new GraphicGenerator lcg
-  gg.render new GraphicObjects.Circle [ 40, 9, 7 ]
+  gg.render new GraphicObjects.Circle [ 7, 7, 5 ]
 
   #######################
   ### SYMBOLS DISPLAY ###
