@@ -1,13 +1,13 @@
 
-controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects",
-(el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects) ->
+controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects,Game",
+(el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,GraphicObjects,Game) ->
 
   # custom symbols
   symbols =
-    A: new Symbols.Hexadecimal "A", 5, "22a318fe31"
-    B: new Symbols.Hexadecimal "B", 5, "f463e8c63e"
-    C: new Symbols.Hexadecimal "C", 5, "746108422e"
-    DOT: new Symbols.Hexadecimal "DOT", 2, "f"
+    A: new Symbols.Hexadecimal 5, "22a318fe31"
+    B: new Symbols.Hexadecimal 5, "f463e8c63e"
+    C: new Symbols.Hexadecimal 5, "746108422e"
+    DOT: new Symbols.Hexadecimal 2, "f"
     SPACE: new Symbols.ControlSymbol CharacterGenerator.CONTROL_SYMBOL_INCREMENT
     NEWLINE:new Symbols.ControlSymbol CharacterGenerator.CONTROL_SYMBOL_NEWLINE
 
@@ -36,6 +36,26 @@ controller "main:el,MT16S2H2FLA,CharacterGenerator,Symbols,GraphicGenerator,Grap
   cg.printSymbol symbols.B
   cg.printSymbol symbols.NEWLINE
   cg.printSymbol symbols.C
+
+  ####################
+  ### GAME DISPLAY ###
+  ####################
+  mountGame = el.get "#game"
+  lcgm = new MT16S2H2FLA mountGame
+  game = new Game lcgm
+                                                           # walls
+  game.addWall new GraphicObjects.Line [ [1,1],  [50,1]  ] # top
+  game.addWall new GraphicObjects.Line [ [50,1], [50,16] ] # right
+  game.addWall new GraphicObjects.Line [ [1,16], [50,16] ] # bottom
+  game.addWall new GraphicObjects.Line [ [1,1],  [1,16]  ] # left
+
+  game.addWall new GraphicObjects.Line [ [22,16], [22,6]  ] # 1
+
+  game.init()
+  game.start()
+
+  window.game = game
+
 
 
 

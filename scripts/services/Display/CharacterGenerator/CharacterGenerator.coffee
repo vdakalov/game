@@ -18,17 +18,20 @@ service "CharacterGenerator:LiquidCrystal,Symbols,utils", (LiquidCrystal,Symbols
       newLine: ->
         cursor[0] = 0
         cursor[1] = (cursor[1] + (liquidCrystal.height / lines)) % liquidCrystal.height
-      increment: ->
-        if cursor[0] >= (letters - 1) * (liquidCrystal.width / letters)
+      increment: (index = liquidCrystal.width / letters) ->
+        if cursor[0] + index >= liquidCrystal.length
           cursor[0] = 0
           do systemMethods.newLine
         else
-          cursor[0] = cursor[0] + (liquidCrystal.width / letters)
+          cursor[0] = cursor[0] + index
 
     constructor: (lc, _letters, _lines) ->
       liquidCrystal = lc
       lines = _lines
       letters = _letters
+
+    setCursor: (x, y) ->
+      cursor = [x, y]
 
     printSymbol: (symbol) ->
 
@@ -44,7 +47,7 @@ service "CharacterGenerator:LiquidCrystal,Symbols,utils", (LiquidCrystal,Symbols
               x = cursor[0] + coord[0]
               y = cursor[1] + coord[1]
               liquidCrystal.setPixel x, y
-          systemMethods.increment()
+          systemMethods.increment(symbol.size + 1)
 
       undefined
 

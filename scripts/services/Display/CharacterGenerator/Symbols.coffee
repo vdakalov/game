@@ -8,7 +8,7 @@ service "Symbols:utils", (utils) ->
   Binary:
     class Binary
       type: "char"
-      constructor: (@name, @mask) ->
+      constructor: (@size, @mask) ->
 
   Hexadecimal:
     class Hexadecimal
@@ -24,5 +24,5 @@ service "Symbols:utils", (utils) ->
         mask = normalMask.replace(new RegExp("\\d{0,#{mask.length}}$"), mask).split(/\0?/)
         @mask = utils.collect mask, (bit) -> +bit
 
-      constructor: (@name, @size, mask) ->
+      constructor: (@size, mask) ->
         @mask = hex2bin @size, mask
